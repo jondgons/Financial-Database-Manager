@@ -408,7 +408,7 @@
 % journal papers have the author affiliations above the "Manuscript
 % received ..."  text while in non-compsoc journals this is reversed. Sigh.
 
-\author{Cody Gonsowski and Trever Hall}% <-this % stops a space
+\author{Cody Gonsowski\\ Trever Hall}% <-this % stops a space
 %Generally you should be the only author, so drop Michael Shell's name when you are creating your lab reports
 
 % note the % following the last \IEEEmembership and also \thanks - 
@@ -474,7 +474,7 @@
 % in the abstract or keywords.
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-This project is a financial planner to help users keep track of their spending habits. It can display expense and income information over the course of years, and the user can navigate the user interface to see the information for each day. The target audience is for anyone seeking to have more financial stability. We have begun documentation of what our goals are and what we believe is the stopping point of the program. 
+This financial planner is meant to help users keep track of their spending habits. It can display expense and income information over an extended timeframe and allows the user to navigate to a specific day's information through a user interface. The target audience is anyone seeking to have more financial stability, but people can easily use it for casual financial tracking. We have begun documentation of what our goals are and what we believe is the stopping point of the program. 
 \end{abstract}
 
 %As the comment below states, you usually only do these when you're doing a final submission of a paper, to make it easier to find your work when searching.
@@ -535,7 +535,7 @@ This project is a financial planner to help users keep track of their spending h
 % 
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-This is a financial planner for users to track expenses over time and create a budget. Most college students have a hard time with money, either from a lack of funds or spending irresponsibly. If financial habits go unchecked then a person can get trapped in a vicious cycle of debt and high interest rates, just to afford to live. The goal is to provide users with an outlet to track and plan a budget that allows them to live within the income that they have. 
+This is a financial planner that allows users to track expenses over time and create a budget. Most college students have a hard time with money, either from a lack of funds or spending irresponsibly. If financial habits go unchecked, a person can get trapped in a vicious cycle of debt and high interest rates, just to afford to live. The goal is to provide users with an outlet to track their expenses and plan a budget that allows them to live more comfortably within the income they have. 
 
 
 %\subsection{Subsection Heading Here}
@@ -641,26 +641,19 @@ This is a financial planner for users to track expenses over time and create a b
 % \fnbelowfloat command of the stfloats package.
 
 \subsection{Background}
-The hope of this project is for the user to be able to feel more secure with financial decisions by being able to track expenses and income over time.  Expenses include any money spent on bills or even person items. Income is all money accrued wether it is interest from investments or an earned wage. Being as specific and inclusive as possible will allow the user to know where every dime is made and spent.
+The primary goal of this project is to make users feel more secure with their financial decisions by allowing them to track expenses and income over time.  Expenses include any money spent on bills, groceries, personal items, etc. Income is all money accrued, regardless of its source (i.e., interest from investments or an earned wage). Users will be able to know where their funds are at any given time by being as specific and inclusive as possible.
 
-\bigskip
 
-We decided to do this not only because it would be challenging but also have a practical application in our day to day lives. I, Trever Hall, have a paper financial planner that I write and track funds in. I would like to have an online planner, so personally I plan on using this in my day to day life to manage my own finances. 
+We believe that not only will this project will be challenging but also it will provide something practical. I, Trever Hall, have a paper financial planner that I write and track funds in. I would like to have an online planner, so personally I plan on using this in my day to day life to manage my own finances. 
 
 \subsection{Challenges}
-At face value the program seems pretty straight forward. We are not sure of all the challenges we will face, but challenges we do know of include: 
+Because the program seems relatively straightforward, we are unsure of all the challenges to come. However, challenges we expect to come across include: 
 
-\medskip
-
-The creation of new expenses and income on demand
-
-\smallskip
-
-A graphical interface that can support scaling from the span of years to financial events of a specific day.
-
- \smallskip
- 
-Gathering the API’s we want for example one that will allow us to know which day of the week each day fall on.
+\begin{itemize}
+	\item On-demand creation of custom expense and income categories
+	\item Graphical interface that scales from years to a specific day
+	\item Gathering APIs we want (i.e., providing what day July 21, 2026 is)
+\end{itemize}
  
 %add most difficult once we feel like we know what it is.
 
@@ -669,18 +662,15 @@ Gathering the API’s we want for example one that will allow us to know which d
 
 
 \section{Scope}
-In terms of the scope of the project what we would define as done would be the user having the ability to locate a specific day within a year. Once there, the user would be able to view all information for that day and also be able to add expenses and income information. For each expense the user should be able to put it into a preset category, and the money spent on each category should be displayed on every view implemented (yearly, monthly, etc.). Income should be able to be put under the categories of Salary or Other, and displayed with the expense information. Along with that, a difference of the money earned (net gain or loss) for that time period and the money spent should also be in view.
+The user will be able to locate a specific day within a year. Once there, the user can view all information for that day and add expense and income information. The user can put any expense entry into a preset category. Income will go under the categories of Salary or Other and should be displayed alongside expenses. Total money spent or earned in each category, as well as net income, will be displayed on every view implemented (yearly, monthly, etc.).
 
 \subsection{Stretch Goals}
-Stretch goals for our project are things that we think would give the user a better experience, but are not necessary for the over all function of the program. Those would include:
+Some stretch goals we would like to implement to provide a better, more convenient experience include:
 
-\medskip
-
-\quad Graphical representation of data for the current view (perhaps a pie chart).
-
-\smallskip
-
-\quad A fullscreen clickable calendar that allows the user to navigate through years all the way down to a specific day. It will be more of a "pretty" way to navigate the information, but not edit.
+\begin{itemize}
+	\item Graphical representation of data for the current view (i.e., categorical pie chart)
+	\item Fullscreen calendar that allows the user to navigate to a specific day (more aesthetic)
+\end{itemize}
 
 %This section is a bit tricksy.  You are going to do your best to set up ground rules:  How will you know when your project is done?
 
