@@ -33,7 +33,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" VerticalAlignment="Center" HorizontalAlignment="Right">
             <MenuItem Header="_Settings" VerticalAlignment="Center" Width="Auto">
                 <MenuItem Name="Exit_Button" Click="Exit_Button_Click"
@@ -45,21 +45,5 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <materialDesign:Flipper Name="DayCard1" Grid.Row="1" Grid.Column="0">
-            <materialDesign:Flipper.FrontContent>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                </Grid>
-
-            </materialDesign:Flipper.FrontContent>
-            <materialDesign:Flipper.BackContent>
-                <StackPanel>
-                    
-                </StackPanel>
-            </materialDesign:Flipper.BackContent>
-        </materialDesign:Flipper>
     </Grid>
 </Window>
