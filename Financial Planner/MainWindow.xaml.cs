@@ -28,5 +28,18 @@ namespace Financial_Planner
         {
             Application.Current.Shutdown();
         }
+
+        /*
+         *  STUFF THAT NEEDS TO GET DONE:
+         *      - form to enter:
+         *          - amount (dynamic income or expense)
+         *          - description
+         *          - date
+         *      - display field to show a selected range's information
+         *      - tie stuff to database
+         *          - querying for info
+         *          - storing info
+         *          - categorizing info?
+         */
     }
 }
