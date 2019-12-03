@@ -29,7 +29,9 @@ namespace Financial_Planner
         {
             InitializeComponent();
             cn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\Financial_Data.mdb");
-            PopulateTable();
+            DisplayTable = GenerateTable();
+            DisplayFlowDocument.Blocks.Add(DisplayTable);
+            CreateAmountNud();
         }
 
         // allows foreach() across a range of DateTimes
@@ -69,17 +71,19 @@ namespace Financial_Planner
                 return;
             }
 
+            // creating database variables
             string query = "SELECT * FROM Financials WHERE FinDate BETWEEN #" + StartDate + "# AND #" + EndDate +"#";
             OleDbCommand cmd = new OleDbCommand(query, cn);
             cn.Open();
             OleDbDataReader read = cmd.ExecuteReader();
             int currentRowNum = 2;
 
-            if (currentRowNum < DisplayTable.RowGroups[0].Rows.Count)
-            {
+            // removes old table and makes a new one
+            DisplayFlowDocument.Blocks.Remove(DisplayTable);
+            DisplayTable = GenerateTable();
+            DisplayFlowDocument.Blocks.Add(DisplayTable);
 
-            }
-
+            // fills table with data
             while (read.Read())
             {
                 // add new rows
@@ -93,7 +97,7 @@ namespace Financial_Planner
                 // fill rows with info
                 currentRow.Cells.Add(new TableCell(new Paragraph(new Run(read[2].ToString().Remove(read[2].ToString().Length - 12))))); // date
                 currentRow.Cells.Add(new TableCell(new Paragraph(new Run(read[3].ToString())))); // desc
-                currentRow.Cells.Add(new TableCell(new Paragraph(new Run(Convert.ToDouble(read[1].ToString()).ToString("0." + new string('0', 2)))))); // amount
+                currentRow.Cells.Add(new TableCell(new Paragraph(new Run("$" + Convert.ToDouble(read[1].ToString()).ToString("0." + new string('0', 2)))))); // amount
 
                 // Bold the first cell.
                 currentRow.Cells[0].FontWeight = FontWeights.Bold;
@@ -101,7 +105,58 @@ namespace Financial_Planner
                 // increments currentRowNum
                 currentRowNum++;
             }
+
             cn.Close();
+        }
+
+        // adds new entry to database
+        private void AddEntryButton_Click(object sender, RoutedEventArgs e)
+        {
+            // creates DateTime to read correct date from DateEntryPicker
+            DateTime EntryDate = new DateTime();
+            if (DateEntryPicker.Text != "")
+            {
+                EntryDate = DateTime.ParseExact(dateTextHelper(DateEntryPicker.Text), "MMddyyyy", CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                MessageBox.Show("Please enter an entry date.", "ERROR: Bad Date", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // creating database variables
+            string query = "INSERT INTO Financials (Amount,FinDate,Description) VALUES (@Amount,@FinDate,@Description)";
+            OleDbCommand cmd = new OleDbCommand(query, cn);
+
+            // adding to cmd for storing
+            cmd.Parameters.Add("@Amount", OleDbType.Double).Value = 12.12; //TODO make this from parsed Amount.Text
+            cmd.Parameters.Add("@FinDate", OleDbType.Date).Value = EntryDate;
+            cmd.Parameters.AddWithValue("@Description", DescriptionText.Text);
+
+            // open, add new, close
+            cn.Open();
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch(OleDbException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            cn.Close();
+        }
+
+        // creates NumericUpDown for Amount
+        public void CreateAmountNud()
+        {
+            // Create and initialize a NumericUpDown control.
+            System.Windows.Forms.NumericUpDown amountNud = new System.Windows.Forms.NumericUpDown();
+
+            // sets parameters for amountNud
+            amountNud.Value = 0; // initial value
+            amountNud.DecimalPlaces = 2; // decimal places
+            amountNud.Increment = .50M; // how much a click should increment
+            //amountNud.Margin;
         }
 
         // converts date format to something readable by DateTime's ParseExact
@@ -146,31 +201,34 @@ namespace Financial_Planner
             return MM + dd + yyyy;
         }
 
-        private void PopulateTable()
+        // generates "empty" table for usage of display
+        private Table GenerateTable()
         {
-            DisplayTable.CellSpacing = 10;
-            DisplayTable.Background = Brushes.White;
+            Table newTable = new Table();
+
+            newTable.CellSpacing = 10;
+            newTable.Background = Brushes.White;
 
             int numberOfColumns = 3;
             for (int x = 0; x < numberOfColumns; x++)
             {
-                DisplayTable.Columns.Add(new TableColumn());
+                newTable.Columns.Add(new TableColumn());
 
                 // alternating column colors
                 if (x % 2 == 0)
-                    DisplayTable.Columns[x].Background = Brushes.LightGray;
+                    newTable.Columns[x].Background = Brushes.LightGray;
                 else
-                    DisplayTable.Columns[x].Background = Brushes.LightSlateGray;
+                    newTable.Columns[x].Background = Brushes.LightSlateGray;
             }
 
             // Create and add an empty TableRowGroup to hold the table's Rows.
-            DisplayTable.RowGroups.Add(new TableRowGroup());
+            newTable.RowGroups.Add(new TableRowGroup());
 
             // Add the first (title) row.
-            DisplayTable.RowGroups[0].Rows.Add(new TableRow());
+            newTable.RowGroups[0].Rows.Add(new TableRow());
 
             // Alias the current working row for easy reference.
-            TableRow currentRow = DisplayTable.RowGroups[0].Rows[0];
+            TableRow currentRow = newTable.RowGroups[0].Rows[0];
 
             // format title row
             currentRow.Background = Brushes.AliceBlue;
@@ -183,8 +241,8 @@ namespace Financial_Planner
 
 
             // Add the header row.
-            DisplayTable.RowGroups[0].Rows.Add(new TableRow());
-            currentRow = DisplayTable.RowGroups[0].Rows[1];
+            newTable.RowGroups[0].Rows.Add(new TableRow());
+            currentRow = newTable.RowGroups[0].Rows[1];
 
             // Global formatting for the header row.
             currentRow.FontWeight = FontWeights.SemiBold;
@@ -193,39 +251,11 @@ namespace Financial_Planner
             currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Date"))));
             currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Description"))));
             currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Amount"))));
+
+            return newTable;
         }
 
-        //TODO make this work
-        private void AddEntryButton_Click(object sender, RoutedEventArgs e)
-        {
-            // creates DateTime to read correct date from DateEntryPicker
-            DateTime EntryDate = new DateTime();
-            if (DateEntryPicker.Text != "")
-            {
-                EntryDate = DateTime.ParseExact(dateTextHelper(DateEntryPicker.Text), "MMddyyyy", CultureInfo.InvariantCulture);
-            }
-            else
-            {
-                MessageBox.Show("Please enter an entry date.", "ERROR: Bad Date", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-        }
-
-        // TODO fix VerifyAmount
-        private bool nonNumberEntered = false;
-        private void VerifyAmount_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void VerifyAmount_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
-        {
-            if (nonNumberEntered)
-            {
-                e.Handled = true;
-            }
-        }
-
+        // prevents non-numeric characters from being entered (except . and -)
         private void AmountText_TextChanged(object sender, TextChangedEventArgs e)
         {
                 AmountText.Text = Regex.Replace(AmountText.Text, "[^0-9.-]+", "");
@@ -234,16 +264,15 @@ namespace Financial_Planner
         /*
          *  STUFF THAT NEEDS TO GET DONE:
          *      - form to enter:
-         *          - amount (dynamic income or expense)
-         *          - description
-         *          - date
-         *      - display field to show a selected range's information
-         *      - tie stuff to database
-         *          - querying for info
-         *          - storing info
-         *          - categorizing info?
+         *          + amount (dynamic income or expense)
+         *              - need to parse
+         *              + numbers only (and '-' & '.')
+         *          + description
+         *          + date
+         *      + display field to show a selected range's information
+         *      + tie stuff to database
+         *          + querying for info
+         *          + storing info
          */
-
-        //amount needs to enter NUMBERS ONLY - allow negative & decimals
     }
 }
