@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
 
 namespace Financial_Planner
 {
@@ -24,9 +25,68 @@ namespace Financial_Planner
         {
             InitializeComponent();
         }
-        private void Exit_Button_Click(object sender, RoutedEventArgs e)
+
+        public IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
         {
-            Application.Current.Shutdown();
+            for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
+                yield return day;
+        }
+
+        private void DisplayDateRange_Click(object sender, RoutedEventArgs e)
+        {
+            // wipes DataDisplay
+            DataDisplay.Text = "";
+
+            // creates a DateTime from StartDatePicker
+            DateTime StartDate = DateTime.ParseExact(dateTextHelper(StartDatePicker.Text), "MMddyyyy", CultureInfo.InvariantCulture);
+            DateTime EndDate = DateTime.ParseExact(dateTextHelper(EndDatePicker.Text), "MMddyyyy", CultureInfo.InvariantCulture);
+
+            foreach (DateTime day in EachDay(StartDate, EndDate))
+            {
+                // get data from database and add to DataDisplay
+                DataDisplay.Text += day.ToString() + "\n";
+            }
+        }
+
+        private string dateTextHelper(string dateText)
+        {
+            int slash = 0;
+            string MM = "";
+            string dd = "";
+            string yyyy = "";
+
+            // loop through dateText
+            foreach(char c in dateText)
+            {
+                if (c == '/')
+                {
+                    slash++;
+                }
+                else if (slash == 0)
+                {
+                    MM += c;
+                }
+                else if (slash == 1)
+                {
+                    dd += c;
+                }
+                else if (slash == 2)
+                {
+                    yyyy += c;
+                }
+            }
+
+            // check if month and day have less than two digits
+            if (MM.Length < 2)
+            {
+                MM = "0" + MM;
+            }
+            if (dd.Length < 2)
+            {
+                dd = "0" + dd;
+            }
+
+            return MM + dd + yyyy;
         }
 
         /*
@@ -41,5 +101,7 @@ namespace Financial_Planner
          *          - storing info
          *          - categorizing info?
          */
+
+        //amount needs to enter NUMBERS ONLY - allow negative & decimals
     }
 }

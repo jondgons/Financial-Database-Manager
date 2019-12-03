@@ -5,45 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Financial_Planner"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="Financial Planner" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        Name="FinancialWindow"
+        Title="Financial Planner"
+        Height="450" Width="800">
+    <Grid Name ="MainGrid">
+        <ScrollViewer>
+            <TextBlock x:Name="DataDisplay" TextWrapping="Wrap" Background="#26000000" Margin="428,10,10,11"/>
+        </ScrollViewer>
 
-        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" VerticalAlignment="Center" HorizontalAlignment="Right">
-            <MenuItem Header="_Settings" VerticalAlignment="Center" Width="Auto">
-                <MenuItem Name="Exit_Button" Click="Exit_Button_Click"
-                    Header="Exit">
-                    <MenuItem.Icon>
-                        <materialDesign:PackIcon
-                            Kind="ExitToApp" />
-                    </MenuItem.Icon>
-                </MenuItem>
-            </MenuItem>
-        </Menu>
+        <Button x:Name="DisplayDateRange" Content="Display" HorizontalAlignment="Left" Margin="320,0,0,10" Width="75" Height="20" VerticalAlignment="Bottom" Click="DisplayDateRange_Click"/>
+
+        <TextBlock x:Name="StartDateText" Margin="10,0,0,39" TextWrapping="Wrap" Text="Start Date:" Height="16" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="63"/>
+        <DatePicker x:Name="StartDatePicker" Margin="10,0,0,10" HorizontalAlignment="Left" Width="102" Height="24" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="EndDateText" HorizontalAlignment="Left" Margin="160,0,0,39" TextWrapping="Wrap" Text="End Date:" Width="63" Height="16" VerticalAlignment="Bottom"/>
+        <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" Margin="160,0,0,10" Height="24" VerticalAlignment="Bottom"/>
+        
+        <Label x:Name="AmountLabel" Content="Amount:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="63"/>
+        <TextBox x:Name="AmountText" HorizontalAlignment="Left" Height="23" Margin="30,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"/>
+        <Label x:Name="DescriptionLabel" Content="Description:" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="DescriptionText" HorizontalAlignment="Left" Height="100" Margin="30,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="365"/>
+        <Label x:Name="DateEnteredLabel" Content="Date:" HorizontalAlignment="Left" Margin="273,10,0,0" VerticalAlignment="Top" Width="63"/>
+        <DatePicker x:Name="DateEnteredPicker" HorizontalAlignment="Left" Margin="293,32,0,0" VerticalAlignment="Top" Width="102"/>
+        
+        <Button x:Name="AddEntryButton" Content="Add" HorizontalAlignment="Left" Margin="320,186,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>
