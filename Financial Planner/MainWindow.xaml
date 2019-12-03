@@ -17,17 +17,17 @@
         <Button x:Name="DisplayDateRange" Content="Display" HorizontalAlignment="Left" Margin="320,0,0,10" Width="75" Height="20" VerticalAlignment="Bottom" Click="DisplayDateRange_Click"/>
 
         <TextBlock x:Name="StartDateText" Margin="10,0,0,39" TextWrapping="Wrap" Text="Start Date:" Height="16" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="63"/>
-        <DatePicker x:Name="StartDatePicker" Margin="10,0,0,10" HorizontalAlignment="Left" Width="102" Height="24" VerticalAlignment="Bottom"/>
+        <DatePicker x:Name="StartDatePicker" Margin="10,0,0,10" HorizontalAlignment="Left" Width="102" Height="24" Text="" VerticalAlignment="Bottom"/>
         <TextBlock x:Name="EndDateText" HorizontalAlignment="Left" Margin="160,0,0,39" TextWrapping="Wrap" Text="End Date:" Width="63" Height="16" VerticalAlignment="Bottom"/>
-        <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" Margin="160,0,0,10" Height="24" VerticalAlignment="Bottom"/>
+        <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" Margin="160,0,0,10" Height="24" Text="" VerticalAlignment="Bottom"/>
         
         <Label x:Name="AmountLabel" Content="Amount:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="63"/>
-        <TextBox x:Name="AmountText" HorizontalAlignment="Left" Height="23" Margin="30,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"/>
+        <TextBox x:Name="AmountText" HorizontalAlignment="Left" Height="23" Margin="30,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" KeyDown="VerifyAmount_KeyDown"/>
         <Label x:Name="DescriptionLabel" Content="Description:" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="90"/>
         <TextBox x:Name="DescriptionText" HorizontalAlignment="Left" Height="100" Margin="30,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="365"/>
-        <Label x:Name="DateEnteredLabel" Content="Date:" HorizontalAlignment="Left" Margin="273,10,0,0" VerticalAlignment="Top" Width="63"/>
-        <DatePicker x:Name="DateEnteredPicker" HorizontalAlignment="Left" Margin="293,32,0,0" VerticalAlignment="Top" Width="102"/>
+        <Label x:Name="DateEntryLabel" Content="Date:" HorizontalAlignment="Left" Margin="273,10,0,0" VerticalAlignment="Top" Width="63"/>
+        <DatePicker x:Name="DateEntryPicker" HorizontalAlignment="Left" Margin="293,32,0,0" VerticalAlignment="Top" Width="102"/>
         
-        <Button x:Name="AddEntryButton" Content="Add" HorizontalAlignment="Left" Margin="320,186,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="AddEntryButton" Content="Add" HorizontalAlignment="Left" Margin="320,186,0,0" VerticalAlignment="Top" Width="75" Click="AddEntryButton_Click"/>
     </Grid>
 </Window>
