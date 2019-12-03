@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
+using System.Data.OleDb;
+using System.Text.RegularExpressions;
 
 namespace Financial_Planner
 {
@@ -21,9 +23,13 @@ namespace Financial_Planner
     /// </summary>
     public partial class MainWindow : Window
     {
+        OleDbConnection cn;
+
         public MainWindow()
         {
             InitializeComponent();
+            cn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\Financial_Data.mdb");
+            PopulateTable();
         }
 
         // allows foreach() across a range of DateTimes
@@ -40,7 +46,6 @@ namespace Financial_Planner
             DateTime EndDate = new DateTime();
 
             // wipes DataDisplay
-            DataDisplay.Text = "";
 
             // creates a DateTime from StartDatePicker & checks if valid
             if (StartDatePicker.Text != "")
@@ -64,11 +69,39 @@ namespace Financial_Planner
                 return;
             }
 
-            foreach (DateTime day in EachDay(StartDate, EndDate))
+            string query = "SELECT * FROM Financials WHERE FinDate BETWEEN #" + StartDate + "# AND #" + EndDate +"#";
+            OleDbCommand cmd = new OleDbCommand(query, cn);
+            cn.Open();
+            OleDbDataReader read = cmd.ExecuteReader();
+            int currentRowNum = 2;
+
+            if (currentRowNum < DisplayTable.RowGroups[0].Rows.Count)
             {
-                // get data from database and add to DataDisplay
-                DataDisplay.Text += day.ToShortDateString() + "\n";
+
             }
+
+            while (read.Read())
+            {
+                // add new rows
+                DisplayTable.RowGroups[0].Rows.Add(new TableRow());
+                TableRow currentRow = DisplayTable.RowGroups[0].Rows[currentRowNum];
+
+                // Global formatting for the row.
+                currentRow.FontSize = 12;
+                currentRow.FontWeight = FontWeights.Normal;
+
+                // fill rows with info
+                currentRow.Cells.Add(new TableCell(new Paragraph(new Run(read[2].ToString().Remove(read[2].ToString().Length - 12))))); // date
+                currentRow.Cells.Add(new TableCell(new Paragraph(new Run(read[3].ToString())))); // desc
+                currentRow.Cells.Add(new TableCell(new Paragraph(new Run(Convert.ToDouble(read[1].ToString()).ToString("0." + new string('0', 2)))))); // amount
+
+                // Bold the first cell.
+                currentRow.Cells[0].FontWeight = FontWeights.Bold;
+
+                // increments currentRowNum
+                currentRowNum++;
+            }
+            cn.Close();
         }
 
         // converts date format to something readable by DateTime's ParseExact
@@ -113,6 +146,56 @@ namespace Financial_Planner
             return MM + dd + yyyy;
         }
 
+        private void PopulateTable()
+        {
+            DisplayTable.CellSpacing = 10;
+            DisplayTable.Background = Brushes.White;
+
+            int numberOfColumns = 3;
+            for (int x = 0; x < numberOfColumns; x++)
+            {
+                DisplayTable.Columns.Add(new TableColumn());
+
+                // alternating column colors
+                if (x % 2 == 0)
+                    DisplayTable.Columns[x].Background = Brushes.LightGray;
+                else
+                    DisplayTable.Columns[x].Background = Brushes.LightSlateGray;
+            }
+
+            // Create and add an empty TableRowGroup to hold the table's Rows.
+            DisplayTable.RowGroups.Add(new TableRowGroup());
+
+            // Add the first (title) row.
+            DisplayTable.RowGroups[0].Rows.Add(new TableRow());
+
+            // Alias the current working row for easy reference.
+            TableRow currentRow = DisplayTable.RowGroups[0].Rows[0];
+
+            // format title row
+            currentRow.Background = Brushes.AliceBlue;
+            currentRow.FontSize = 22;
+            currentRow.FontWeight = FontWeights.Bold;
+
+            // adds title row and spans all columns
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Financials"))));
+            currentRow.Cells[0].ColumnSpan = numberOfColumns;
+
+
+            // Add the header row.
+            DisplayTable.RowGroups[0].Rows.Add(new TableRow());
+            currentRow = DisplayTable.RowGroups[0].Rows[1];
+
+            // Global formatting for the header row.
+            currentRow.FontWeight = FontWeights.SemiBold;
+
+            // Add cells with content to the second row.
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Date"))));
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Description"))));
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Amount"))));
+        }
+
+        //TODO make this work
         private void AddEntryButton_Click(object sender, RoutedEventArgs e)
         {
             // creates DateTime to read correct date from DateEntryPicker
@@ -141,6 +224,11 @@ namespace Financial_Planner
             {
                 e.Handled = true;
             }
+        }
+
+        private void AmountText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+                AmountText.Text = Regex.Replace(AmountText.Text, "[^0-9.-]+", "");
         }
 
         /*

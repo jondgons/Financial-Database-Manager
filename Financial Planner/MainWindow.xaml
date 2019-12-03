@@ -10,9 +10,11 @@
         Title="Financial Planner"
         Height="450" Width="800">
     <Grid Name ="MainGrid">
-        <ScrollViewer>
-            <TextBlock x:Name="DataDisplay" TextWrapping="Wrap" Background="#26000000" Margin="428,10,10,11"/>
-        </ScrollViewer>
+        <FlowDocumentScrollViewer x:Name="DisplayFlowDocumentScrollViewer" Margin="400,0,0,0">
+            <FlowDocument x:Name="DisplayFlowDocument">
+                <Table x:Name="DisplayTable"/>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
 
         <Button x:Name="DisplayDateRange" Content="Display" HorizontalAlignment="Left" Margin="320,0,0,10" Width="75" Height="20" VerticalAlignment="Bottom" Click="DisplayDateRange_Click"/>
 
@@ -22,7 +24,7 @@
         <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" Margin="160,0,0,10" Height="24" Text="" VerticalAlignment="Bottom"/>
         
         <Label x:Name="AmountLabel" Content="Amount:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="63"/>
-        <TextBox x:Name="AmountText" HorizontalAlignment="Left" Height="23" Margin="30,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" KeyDown="VerifyAmount_KeyDown"/>
+        <TextBox x:Name="AmountText" HorizontalAlignment="Left" Height="23" Margin="30,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" KeyDown="VerifyAmount_KeyDown" TextChanged="AmountText_TextChanged"/>
         <Label x:Name="DescriptionLabel" Content="Description:" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="90"/>
         <TextBox x:Name="DescriptionText" HorizontalAlignment="Left" Height="100" Margin="30,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="365"/>
         <Label x:Name="DateEntryLabel" Content="Date:" HorizontalAlignment="Left" Margin="273,10,0,0" VerticalAlignment="Top" Width="63"/>
