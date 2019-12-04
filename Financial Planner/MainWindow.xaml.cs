@@ -31,7 +31,6 @@ namespace Financial_Planner
             cn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\Financial_Data.mdb");
             DisplayTable = GenerateTable();
             DisplayFlowDocument.Blocks.Add(DisplayTable);
-            CreateAmountNud();
         }
 
         // allows foreach() across a range of DateTimes
@@ -46,8 +45,6 @@ namespace Financial_Planner
         {
             DateTime StartDate = new DateTime();
             DateTime EndDate = new DateTime();
-
-            // wipes DataDisplay
 
             // creates a DateTime from StartDatePicker & checks if valid
             if (StartDatePicker.Text != "")
@@ -129,7 +126,7 @@ namespace Financial_Planner
             OleDbCommand cmd = new OleDbCommand(query, cn);
 
             // adding to cmd for storing
-            cmd.Parameters.Add("@Amount", OleDbType.Double).Value = 12.12; //TODO make this from parsed Amount.Text
+            cmd.Parameters.Add("@Amount", OleDbType.Double).Value = AmountDud.Value;
             cmd.Parameters.Add("@FinDate", OleDbType.Date).Value = EntryDate;
             cmd.Parameters.AddWithValue("@Description", DescriptionText.Text);
 
@@ -144,19 +141,6 @@ namespace Financial_Planner
                 MessageBox.Show(exc.Message);
             }
             cn.Close();
-        }
-
-        // creates NumericUpDown for Amount
-        public void CreateAmountNud()
-        {
-            // Create and initialize a NumericUpDown control.
-            System.Windows.Forms.NumericUpDown amountNud = new System.Windows.Forms.NumericUpDown();
-
-            // sets parameters for amountNud
-            amountNud.Value = 0; // initial value
-            amountNud.DecimalPlaces = 2; // decimal places
-            amountNud.Increment = .50M; // how much a click should increment
-            //amountNud.Margin;
         }
 
         // converts date format to something readable by DateTime's ParseExact
@@ -254,25 +238,5 @@ namespace Financial_Planner
 
             return newTable;
         }
-
-        // prevents non-numeric characters from being entered (except . and -)
-        private void AmountText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-                AmountText.Text = Regex.Replace(AmountText.Text, "[^0-9.-]+", "");
-        }
-
-        /*
-         *  STUFF THAT NEEDS TO GET DONE:
-         *      - form to enter:
-         *          + amount (dynamic income or expense)
-         *              - need to parse
-         *              + numbers only (and '-' & '.')
-         *          + description
-         *          + date
-         *      + display field to show a selected range's information
-         *      + tie stuff to database
-         *          + querying for info
-         *          + storing info
-         */
     }
 }
