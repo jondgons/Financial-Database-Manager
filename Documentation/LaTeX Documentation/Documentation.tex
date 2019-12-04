@@ -41,7 +41,7 @@
 % in the abstract or keywords.
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-This financial planner is meant to help users keep track of their spending habits. It can display expense and income information over an extended timeframe and allows the user to navigate to a specific day's information through a user interface. The target audience is anyone seeking to have more financial stability, but people can easily use it for casual financial tracking. We have created a UML diagram and a timeline demonstrating the life cycle of the project so far.
+This financial database manager is meant to help users keep track of their finances. It can display expense and income information over an extended timeframe and allows the user to navigate to a range of days' information through a user interface. The target audience is anyone seeking to have more financial stability, but people can easily use it for casual financial tracking. Timeline and the baseline project were most recently completed.
 \end{abstract}
 }
 
@@ -55,50 +55,52 @@ This financial planner is meant to help users keep track of their spending habit
 
 
 \section{Introduction}
+This is a financial database manager that allows users to track expenses and incomes over time. Most young adults, especially college students, have a hard time with money, either from a lack of funds or from spending irresponsibly. If bad financial habits go unchecked, a person can potentially get trapped in a vicious cycle of day-to-day living and high outgoing payments. Even if people are not having a hard time with money, it still helps to develop good habits for the future as soon as possible.
 
-This is a financial planner that allows users to track expenses over time and create a budget. Most young adults, especially college students, have a hard time with money, either from a lack of funds or spending irresponsibly. If financial habits go unchecked, a person can get trapped in a vicious cycle of debt and high interest rates, just to afford to live. Even if people are not having a hard time with money, it still helps to develop good habits for the future as soon as possible.
-
-The goal is to provide users with an outlet to track their expenses and plan a budget that allows them to live more comfortably within the income they have. By tracking and categorizing expenses, even all the small amounts, people will be able to see where their money goes and how much it adds up. Once people recognize how much they are actually spending, they are then able to tailor a budget to their needs.
+The goal is to provide users with a database manager that allows for them to easily view how much they are making or spending over a given period of time.
 
 
 \subsection{Background}
-The primary goal of this project is to make users feel more secure with their financial decisions by allowing them to track expenses and income over time.  Expenses include any money spent on bills, groceries, personal items, etc. Income is all money accrued, regardless of its source (i.e., interest from investments or an earned wage). Users will be able to know where their funds are at any given time by being as specific and inclusive as possible.
+The primary goal of this project is to keep a localized database of incomes and expenses that are entered by the user. This allows for the user to easily view any number of entries in a given range. Users will be able to see detailed descriptions of financial data they provide, given they input a sufficient description.
 
-We believe that not only will this project will be challenging but also it will provide something practical. Trever Hall, a developer on the team, uses a paperback financial planner to keep track of funds. He would like to have an online planner to use in his day-to-day life to manage his own finances.
+I believe that not only will this project will be challenging but also it will provide something practical. Trever Hall, an ex-developer of the team, uses a paperback financial planner to keep track of funds. He would like to have an online planner to use in his day-to-day life to manage his own finances, but that seems a bit out of reach at this point.
 
 
 \subsection{Challenges}
-Because the program seems relatively straightforward, we are unsure of all the challenges to come. However, challenges we expect to come across include as follows: on-demand creation of custom expense and income categories, graphical interface that scales from years to a specific day, and gathering APIs we would like to use to help the user experience.
+Because the program seemed relatively straightforward, I was unsure of all the challenges to come. However, challenges I expected to come across included as follows: on-demand creation of database entries and financial display that shows all entries in a given range.
+
+The on-demand creation of database entries was relatively straightforward. Once I understood how to use OleDB stuff better, it became very easy.
+Financial display was handled via a FlowDocument + a Table. This was to show an organized representation of the data that is uniformly formatted.
 
 %As you overcome these challenges, this section becomes more of a retrospective: don't only identify the challenge, but also briefly outline the solution!
 
-
+%HEREEEEEEEEEEEEEEEEE
 \section{Scope}
-The user will be able to locate a specific day within a year. Once there, the user can view all information for that day and add expense and income information. The user will be able to add expenses and income to a selection of preset categories, as well as custom user-created categories. Expense and income information will be displayed alongside each other for easy comparison. Total money spent or earned in each category, as well as net income, will be displayed on every view implemented (yearly, monthly, etc.).
+The user will be able to add an entry to the database through simple form controls. The user will also be able to select a range of dates and display it as a formatted table on a large portion of the application window. A total row will be displayed at the bottom of the table.
 
-Some stretch goals we would like to implement to provide a better, more convenient user experience include as follows: graphical representation of data for the current view (i.e., categorical pie chart) and a fullscreen calendar that allows the user to navigate to a specific day (more aesthetic).
+Some stretch goals we would like to implement to provide a fuller user experience include as follows: clickable calendar interface and a graphical representation of the data.
 
 %add out of scope of this class goals?
 
 
 \subsection{Requirements}
-Each user should have their own planner independent from other users; by using an account-based system, this becomes very simple. When using accounts, however, security is something that cannot be overlooked. Ensuring that the planner scales well with large amounts of information allows for users to input data freely.
+Users can keep the database stored locally so their own form(s) of security will help cover it. Ensuring that the database scales well with large amounts of information allows for users to input data freely.
 
 %explains how we got func and non-func requirements
 
 \subsubsection{Functional}
 \begin{itemize}
-\item User needs to have a personal financial planner -- this will be on a per-user basis
-\item Users will have accounts that allows them to access their own planner from anywhere with an internet connection and the appropriate software -- this allows users to remotely change their planner
-\item Calendar date selection should be locked to only valid, calendar-standard, integer inputs
+\item User needs to have a local financial database
+\item User can edit the database directly, and the database should be changed when running the manager
+\item Calendar date selection should be locked to only valid, calendar-standard inputs
 \end{itemize}
 
 %add more functional requirements
 
 \subsubsection{Non-Functional}
 \begin{itemize}
-\item Security -- user credentials must be encrypted on disk, users should be able to reset their passwords if forgotten
-\item Scalability -- planner should be able to handle many years' worth of information
+\item Operability -- interface should be easy to understand and use
+\item Scalability -- database should be able to handle many years' worth of information
 \end{itemize}
 
 
@@ -176,83 +178,45 @@ Alternative: Input is null
 Sorry, there are no interface mockups for this iteration of the project.
 
 \section{Project Timeline}
-Go back to your notes and look up a typical project development life cycle for the Waterfall approach.  How will you follow this life cycle over the remainder of this semester?  This will usually involve a chart showing your proposed timeline, with specific milestones plotted out.  Make sure you have deliverable dates from the course schedule listed, with a plan to meet them (NOTE: these are generally optimistic deadlines).
-
-\section{Project Structure}
-At first, this will be a little empty (it will need to be filled in by the time you turn in your final report).  This is your chance to discuss all of your design decisions (consider this the README's big brother).
-
-\subsection{UML Outline}
-Show the full structure of your program.  Make sure to keep on updating this section as your project evolves (you often start out with one plan, but end up modifying things as you move along).  As a note, while Dia fails miserably at generating pdfs (probably my fault), I have had much success with png files.  Make sure to wrap your images in a \texttt{figure} environment, and to reference with the \texttt{ref} command.  For example, see Figure \ref{cat2}.
+Timeline vaguely looks like... See Figure \ref{Timeline}.
 
 \begin{figure}[ht!]
-\includegraphics[scale=1.5]{cat2.jpg}
-\caption{Your figures should be in the \emph{figure} environment, and have captions.  Should also be of diagrams pertaining to your project, not random internet kittens}
-\label{cat2}
+\includegraphics[height=350px, width=500px]{Timeline.png}
+\caption{This is a timeline!}
+\label{Timeline}
 \end{figure}
 
-\subsection{Design Patterns Used}
-Make sure to actually use at least 2 design patterns from this class.  This is not normally part of such documentation, but largely just specific to this class -- I want to see you use the patterns!
+\section{Project Structure}
+Three objects that allow the user to input, DecimalUpDown (restricts to numerical values), DatePicker (calendar selection of date), and Description (textbox entry)
+ "Add" Button allows user to add this in one click.
+Date range selection utilizes two DatePickers for easy selection.
+"Display" Button allows user to update Financials table in one click.
 
+\subsection{UML Outline}
+UML vaguely looks like... See Figure \ref{UML}.
+
+\begin{figure}[ht!]
+\includegraphics[height=200px, width=500px]{FinancialDMDiagram.jpg}
+\caption{Poorly put together UML layout. Did not utilize classes as well as I should have.}
+\label{UML}
+\end{figure}
+
+%\begin{figure}[ht!]
+%\includegraphics[scale=1.5]{cat2.jpg}
+%\caption{Your figures should be in the \emph{figure} environment, and have captions.  Should also be of diagrams pertaining to your project, not random internet kittens}
+%\label{cat2}
+%\end{figure}
+
+\subsection{Design Patterns Used}
+I used the Facade pattern to allow the user to one-click add and display data.
 
 \section{Results}
-This section will start out a little vague, but it should grow as your project evolves.  With each deliverable you hand in, give me a final summary of where your project stands.  By the end, this should be a reflective section discussing how many of your original goals you managed to attain/how many desired use cases you implemented/how many extra features you added.
+Unfortunately, many of the project's original goals were not accomplished. The original interface needed a rework, which seemed to be going okay, but there is only so much that can be done at this point.
 
 \subsection{Future Work}
-Where are you going next with your project?
-For early deliverables, what are your next steps?  (HINT: you will typically want to look back at your timeline and evaluate: did you meet your expected goals?  Are you ahead of schedule?  Did you decide to shift gears and implement a new feature?)
-By the end, what do you plan on doing with this project?  Will you try to sell it?  Set it on fire?  Link to it on your resume and forget it exists?
-
-
-\begin{thebibliography}{1}
-
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
-\end{thebibliography}
-
-% biography section
-% 
-% If you have an EPS/PDF photo (graphicx package needed) extra braces are
-% needed around the contents of the optional argument to biography to prevent
-% the LaTeX parser from getting confused when it sees the complicated
-% \includegraphics command within an optional argument. (You could create
-% your own custom macro containing the \includegraphics command to make things
-% simpler here.)
-%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
-% or if you just want to reserve a space for a photo:
-
-%Ignore this for the lab
-
-\begin{IEEEbiography}{Michael Shell}
-Biography text here.
-\end{IEEEbiography}
-
-% if you will not have a photo at all:
-\begin{IEEEbiographynophoto}{John Doe}
-Biography text here.
-\end{IEEEbiographynophoto}
-
-% insert where needed to balance the two columns on the last page with
-% biographies
-%\newpage
-
-\begin{IEEEbiographynophoto}{Jane Doe}
-Biography text here.
-\end{IEEEbiographynophoto}
-
-% You can push biographies down or up by placing
-% a \vfill before or after them. The appropriate
-% use of \vfill depends on what kind of text is
-% on the last page and whether or not the columns
-% are being equalized.
-
-%\vfill
-
-% Can be used to pull up biographies so that the bottom of the last one
-% is flush with the other column.
-%\enlargethispage{-5in}
-
+It would be ideal to have the planner further developed with a calendar-based interface. This would be easier to see all finances at a glance.
+Definitely did not meet many of the expected goals, but going solo and coding it all in sub 32 hours feels impressive enough. Even ties to a database.
+By the end, I will likely forget it exists. Sure it can go on a resume, but I'm not sure it's something I can be proud of.
 
 
 % that's all folks

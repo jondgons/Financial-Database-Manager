@@ -72,7 +72,9 @@ namespace Financial_DM
             OleDbCommand cmd = new OleDbCommand(query, cn);
             cn.Open();
             OleDbDataReader read = cmd.ExecuteReader();
+            TableRow currentRow;
             int currentRowNum = 2;
+            double tableTotal = 0.00;
 
             // removes old table and makes a new one
             DisplayFlowDocument.Blocks.Remove(DisplayTable);
@@ -84,7 +86,7 @@ namespace Financial_DM
             {
                 // add new rows
                 DisplayTable.RowGroups[0].Rows.Add(new TableRow());
-                TableRow currentRow = DisplayTable.RowGroups[0].Rows[currentRowNum];
+                currentRow = DisplayTable.RowGroups[0].Rows[currentRowNum];
 
                 // Global formatting for the row.
                 currentRow.FontSize = 12;
@@ -95,12 +97,28 @@ namespace Financial_DM
                 currentRow.Cells.Add(new TableCell(new Paragraph(new Run(read[3].ToString())))); // desc
                 currentRow.Cells.Add(new TableCell(new Paragraph(new Run("$" + Convert.ToDouble(read[1].ToString()).ToString("0." + new string('0', 2)))))); // amount
 
+                // add amounts to total
+                tableTotal += Convert.ToDouble(read[1].ToString());
+
                 // Bold the first cell.
                 currentRow.Cells[0].FontWeight = FontWeights.Bold;
 
                 // increments currentRowNum
                 currentRowNum++;
             }
+
+            // add total row
+            DisplayTable.RowGroups[0].Rows.Add(new TableRow());
+            currentRow = DisplayTable.RowGroups[0].Rows[currentRowNum];
+
+            // add total "title" cell
+            currentRow.FontWeight = FontWeights.Bold;
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Total"))));
+            currentRow.Cells[0].ColumnSpan = 2;
+
+            // add total amount cell
+            currentRow.FontWeight = FontWeights.Normal;
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("$" + tableTotal.ToString("0." + new string('0', 2))))));
 
             cn.Close();
         }
