@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="Financial_DataConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="Financial_DataConnectionString (Settings)" PropertyReference="ApplicationSettings.Financial_Planner.Properties.Settings.GlobalReference.Default.Financial_DataConnectionString" Provider="System.Data.OleDb" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="Financial_DataConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="Financial_DataConnectionString (Settings)" PropertyReference="ApplicationSettings.Financial_DM.Properties.Settings.GlobalReference.Default.Financial_DataConnectionString" Provider="System.Data.OleDb" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="FinancialsTableAdapter" GeneratorDataComponentClassName="FinancialsTableAdapter" Name="Financials" UserDataComponentName="FinancialsTableAdapter">
@@ -44,7 +44,7 @@
   <xs:element name="Financial_DataDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="Financial_DataDataSet" msprop:Generator_UserDSName="Financial_DataDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Financials" msprop:Generator_TableClassName="FinancialsDataTable" msprop:Generator_TableVarName="tableFinancials" msprop:Generator_TablePropName="Financials" msprop:Generator_RowDeletingName="FinancialsRowDeleting" msprop:Generator_RowChangingName="FinancialsRowChanging" msprop:Generator_RowEvHandlerName="FinancialsRowChangeEventHandler" msprop:Generator_RowDeletedName="FinancialsRowDeleted" msprop:Generator_UserTableName="Financials" msprop:Generator_RowChangedName="FinancialsRowChanged" msprop:Generator_RowEvArgName="FinancialsRowChangeEvent" msprop:Generator_RowClassName="FinancialsRow">
+        <xs:element name="Financials" msprop:Generator_TableClassName="FinancialsDataTable" msprop:Generator_TableVarName="tableFinancials" msprop:Generator_RowChangedName="FinancialsRowChanged" msprop:Generator_TablePropName="Financials" msprop:Generator_RowDeletingName="FinancialsRowDeleting" msprop:Generator_RowChangingName="FinancialsRowChanging" msprop:Generator_RowEvHandlerName="FinancialsRowChangeEventHandler" msprop:Generator_RowDeletedName="FinancialsRowDeleted" msprop:Generator_RowClassName="FinancialsRow" msprop:Generator_UserTableName="Financials" msprop:Generator_RowEvArgName="FinancialsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="FinID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnFinID" msprop:Generator_ColumnPropNameInRow="FinID" msprop:Generator_ColumnPropNameInTable="FinIDColumn" msprop:Generator_UserColumnName="FinID" type="xs:int" minOccurs="0" />

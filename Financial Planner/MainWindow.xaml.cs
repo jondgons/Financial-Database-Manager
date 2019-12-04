@@ -14,9 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
 using System.Data.OleDb;
-using System.Text.RegularExpressions;
 
-namespace Financial_Planner
+namespace Financial_DM
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

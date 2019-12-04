@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace Financial_Planner {
+namespace Financial_DM {
     
     
     /// <summary>
@@ -727,7 +727,7 @@ namespace Financial_Planner {
         }
     }
 }
-namespace Financial_Planner.Financial_DataDataSetTableAdapters {
+namespace Financial_DM.Financial_DataDataSetTableAdapters {
     
     
     /// <summary>
@@ -869,7 +869,7 @@ namespace Financial_Planner.Financial_DataDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::Financial_Planner.Properties.Settings.Default.Financial_DataConnectionString;
+            this._connection.ConnectionString = global::Financial_DM.Properties.Settings.Default.Financial_DataConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
