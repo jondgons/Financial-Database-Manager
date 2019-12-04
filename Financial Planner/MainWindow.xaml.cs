@@ -115,9 +115,17 @@ namespace Financial_Planner
             {
                 EntryDate = DateTime.ParseExact(dateTextHelper(DateEntryPicker.Text), "MMddyyyy", CultureInfo.InvariantCulture);
             }
+            // checks if there is an EntryDate
             else
             {
                 MessageBox.Show("Please enter an entry date.", "ERROR: Bad Date", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // checks if there is an Amount
+            if (AmountDud.Value == null)
+            {
+                MessageBox.Show("Please enter an amount.", "ERROR: No Amount", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
