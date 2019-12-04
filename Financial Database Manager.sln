@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial Database Manager", "Financial Planner\Financial Database Manager.csproj", "{D0BCF37E-1CB1-4B62-B050-52AE5C37CF16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial Database Manager", "Financial Database Manager\Financial Database Manager.csproj", "{D0BCF37E-1CB1-4B62-B050-52AE5C37CF16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

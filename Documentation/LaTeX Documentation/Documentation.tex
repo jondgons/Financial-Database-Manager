@@ -32,10 +32,10 @@
 
 \begin{document}
 %title
-\title{Financial Planner}
+\title{Financial Database Manager}
 
 %author names
-\author{Cody Gonsowski\\ Trever Hall}% <-this % stops a space
+\author{Cody Gonsowski}% <-this % stops a space
 
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
@@ -126,68 +126,45 @@ Use Case ID & Use Case Name & Primary Actor & Complexity & Priority \\
 \label{tab:useCaseIndex}
 \end{table}
 
-%use cae 1
+%use case 1
 \begin{itemize}
 \item[Use Case Number:] 1
-\item[Use Case Name:] Search date
-\item[Description:] A user enters the calendar date where they want to go. They will click on the "Search" button. This will adjust the calendar and info view accordingly.
+\item[Use Case Name:] Date range
+\item[Description:] User selects range of dates they wish to view. They will click on the "Display" button. This will update the table accordingly.
 \end{itemize}
 
 \begin{enumerate}
-\item User enters the month, day, and/or year they wish to jump to
-\item User left-clicks on the "Search" button
-\item Calendar and Info displays now display the chosen date and its information
-\item[Termination Outcome:] The user's planner is updated to display information of the chosen date.
+\item User enters the initial date of the range
+\item User enters the final date of the range
+\item User clicks "Display"
+\item Financials table will display information of dates in the range
+\item[Termination Outcome:] The Financials table is updated to display the information in the given range.
 \end{enumerate}
 
 %use case 1, alternative 1
-Alternative: Input is invalid
+Alternative: Input is null
 \begin{enumerate}
-\item User enters the month, day, and/or year they wish to jump to
-\item User left-clicks on the "Search" button
-\item Calendar and Info displays are reset to the previous selected date
+\item User clicks "Display" without anything in start or end date
+\item Error will appear indicating no start date
+\item If there was a start date, then an error will appear indicating no end date
 \item[Termination Outcome:] The user's planner display is left unchanged.
 \end{enumerate}
 
 %use case 2
 \begin{itemize}
 \item[Use Case Number:] 2
-\item[Use Case Name:] Add budget category
-\item[Description:] A user would like to add a custom budget category. They will enter a custom category in the "Add a category" text box. They will click "Confirm." This will add a custom category for the budget section.
+\item[Use Case Name:] Add entry
+\item[Description:] A user would like to add an entry to the database. They will fill out the three fields (amount, date, and description) and click the "Add" button. This will add the entry to the database.
 \end{itemize}
 
 \begin{enumerate}
-\item User enters the name of the category they would like to add into the "Add a category" text box
-\item User left-clicks on the "Confirm" button
-\item Budget should now have a new available category
-\item[Termination Outcome:] The budget section should now have an additional category to add budget info under.
+\item User selects an entry date using the date picker
+\item User enters an amount
+\item User enters a description (or doesn't)
+\item User clicks on the "Add" button
+\item Entry will be stored in the database
+\item[Termination Outcome:] The database will now contain another entry made by the user. (NOTE: does not dynamically update Financials table if entry is in range)
 \end{enumerate}
-
-%use case 3
-\begin{itemize}
-\item[Use Case Number:] 3
-\item[Use Case Name:] Sign-in
-\item[Precondition:] User already has a pre-existing account.
-\item[Description:] A user wants to sign-in to access their financial planner. The user enters their username in the "Username" text box and their password in the "Password" text box. They will click "Sign-in." This will allow them to access their personal financial planner.
-\end{itemize}
-
-\begin{enumerate}
-\item User enters their username into the "Username" text box
-\item User enters their password into the "Password" text box
-\item User left-clicks the "Sign-in" button
-\item User can access their financial planner
-\item[Termination Outcome:] The user should be signed in and able to access and edit their own unique financial planner.
-\end{enumerate}
-
-%use case 3, alternative 1
-Alternative: User enters incorrect username or password
-\begin{enumerate}
-\item User enters their username into the "Username" text box
-\item User enters their password into the "Password" text box
-\item User left-clicks the "Sign-in" button
-\item The username and password boxes reset to empty
-\item[Termination Outcome:] The user is unable to sign in and needs to try again in order to access their unique financial planner.
-\end {enumerate}
 
 %\begin{figure}[ht!]
 %\includegraphics[height=250px, width=350px]{cat1.jpg}
@@ -196,42 +173,7 @@ Alternative: User enters incorrect username or password
 %\end{figure}
 
 \subsection{Interface Mockups}
-
-\smallskip
-
-\begin{figure}[h]
-\centering
-\begin{minipage}{.5\textwidth}
-\centering
-\includegraphics[scale = .05]{LoginIn.jpg}
-\caption{The screen that the user will be greeted with and for case 3.}
-\label{LoginScreen}
-\end{minipage}%
-\begin{minipage}{.5\textwidth}
-\centering
-\includegraphics[scale = .05]{BudgetView.jpg}
-\caption{Displays the budget information for selected time frame, and takes input (for example use case 2).}
-\label{BudgetScreen}
-\end{minipage}
-\end{figure}
-
-
-\begin{figure}[h]
-\centering
-\begin{minipage}{.5\textwidth}
-\centering
-\includegraphics[scale = .05]{StatsView.jpg}
-\caption{Displays the statistics for selected time frame.}
-\label{StatsScreen}
-\end{minipage}%
-\begin{minipage}{.5\textwidth}
-\centering
-\includegraphics[scale = .05]{Income-Expenses.jpg}
-\caption{Displays income and expenses for selected time frame, and takes input.}
-\label{Income-ExpenseScreen}
-\end{minipage}
-\end{figure}
-
+Sorry, there are no interface mockups for this iteration of the project.
 
 \section{Project Timeline}
 Go back to your notes and look up a typical project development life cycle for the Waterfall approach.  How will you follow this life cycle over the remainder of this semester?  This will usually involve a chart showing your proposed timeline, with specific milestones plotted out.  Make sure you have deliverable dates from the course schedule listed, with a plan to meet them (NOTE: these are generally optimistic deadlines).
