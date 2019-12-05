@@ -167,6 +167,7 @@ Alternative: Input is null
 \item Entry will be stored in the database
 \item[Termination Outcome:] The database will now contain another entry made by the user. (NOTE: does not dynamically update Financials table if entry is in range)
 \end{enumerate}
+%fix use cases
 
 %\begin{figure}[ht!]
 %\includegraphics[height=250px, width=350px]{cat1.jpg}
@@ -175,10 +176,15 @@ Alternative: Input is null
 %\end{figure}
 
 \subsection{Interface Mockups}
-Sorry, there are no interface mockups for this iteration of the project.
+Three objects that allow the user to input, DecimalUpDown (restricts to numerical values), DatePicker (calendar selection of date), and Description (textbox entry)
+ "Add" Button allows user to add this in one click.
+Date range selection utilizes two DatePickers for easy selection.
+"Display" Button allows user to update Financials table in one click.
+%needs pictures
 
 \section{Project Timeline}
 Timeline vaguely looks like... See Figure \ref{Timeline}.
+%explain
 
 \begin{figure}[ht!]
 \includegraphics[height=350px, width=500px]{Timeline.png}
@@ -187,13 +193,11 @@ Timeline vaguely looks like... See Figure \ref{Timeline}.
 \end{figure}
 
 \section{Project Structure}
-Three objects that allow the user to input, DecimalUpDown (restricts to numerical values), DatePicker (calendar selection of date), and Description (textbox entry)
- "Add" Button allows user to add this in one click.
-Date range selection utilizes two DatePickers for easy selection.
-"Display" Button allows user to update Financials table in one click.
+MainWindow utilizes DisplayDataRange and AddEntry to provide easy-to-use interfaces for the user.
+%needs updating
 
 \subsection{UML Outline}
-UML vaguely looks like... See Figure \ref{UML}.
+UML vaguely looks like... See Figure \ref{UML}. MainWindow utilizes two main functions: DisplayDataRange and AddEntry. DisplayDataRange takes the StartDatePicker's and EndDatePicker's entered dates to determine what should be displayed in the table. AddEntry takes the Amount, Date, and Description entered into the form to create a new entry in the database that can be loaded up later.
 
 \begin{figure}[ht!]
 \includegraphics[height=200px, width=500px]{FinancialDMDiagram.jpg}
@@ -208,15 +212,16 @@ UML vaguely looks like... See Figure \ref{UML}.
 %\end{figure}
 
 \subsection{Design Patterns Used}
-I used the Facade pattern to allow the user to one-click add and display data.
+AddEntry provides an easy to use interface (Facade) for the user to add new entries to the database, without the user having to go enter everything directly into the database: The program takes care of this.
+DisplayDateRange also allows the user to select two dates and display that range of dates, without the user having to sift through all of the database entries manually.
 
 \section{Results}
-Unfortunately, many of the project's original goals were not accomplished. The original interface needed a rework, which seemed to be going okay, but there is only so much that can be done at this point.
+Unfortunately, many of the project's original goals were not accomplished. The original interface needed a rework to account for change of plans, but hopefully this can be changed in the future to fit a calendar-based interface as originally planned. Some new challenges arose along the way as well, such as working with interworking GUIs, that I was unable to conquer within the timeframe. This should be something to overcome later when implementing the calendar-based interface.
 
 \subsection{Future Work}
 It would be ideal to have the planner further developed with a calendar-based interface. This would be easier to see all finances at a glance.
-Definitely did not meet many of the expected goals, but going solo and coding it all in sub 32 hours feels impressive enough. Even ties to a database.
-By the end, I will likely forget it exists. Sure it can go on a resume, but I'm not sure it's something I can be proud of.
+Allowing multiple users to use the same build of the program through user accounts would be beneficial.
+On that same note, going online with the database storage would allow people with the build to access their personal database from anywhere.
 
 % that's all folks
 \end{document}
