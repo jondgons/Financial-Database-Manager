@@ -63,7 +63,7 @@ The goal is to provide users with a database manager that allows for them to eas
 \subsection{Background}
 The primary goal of this project is to keep a localized database of incomes and expenses that are entered by the user. This allows for the user to easily view any number of entries in a given range. Users will be able to see detailed descriptions of financial data they provide, given they input a sufficient description.
 
-I believe that not only will this project will be challenging but also it will provide something practical. Suppose a person uses a paperback financial planner to keep track of funds. S/he would like to have an online planner to use in their day-to-day life to manage their own finances, but that seems a bit out of reach at this point.
+I believe that not only will this project will be challenging but also it will provide something practical. Suppose a person uses a paperback financial planner to keep track of funds. S/he would like to have an online planner to use in their day-to-day life to manage their own finances, but that seems a bit out of reach at this point. In this way, it came to be a locally usable program for database management.
 
 
 \subsection{Challenges}
@@ -80,13 +80,8 @@ The user will be able to add an entry to the database through simple form contro
 
 Some stretch goals we would like to implement to provide a fuller user experience include as follows: clickable calendar interface and a graphical representation of the data.
 
-%add out of scope of this class goals?
-
-
 \subsection{Requirements}
 Users can keep the database stored locally so their own form(s) of security will help cover it. Ensuring that the database scales well with large amounts of information allows for users to input data freely.
-
-%explains how we got func and non-func requirements
 
 \subsubsection{Functional}
 \begin{itemize}
@@ -95,14 +90,11 @@ Users can keep the database stored locally so their own form(s) of security will
 \item Calendar date selection should be locked to only valid, calendar-standard inputs
 \end{itemize}
 
-%add more functional requirements
-
 \subsubsection{Non-Functional}
 \begin{itemize}
 \item Operability -- interface should be easy to understand and use
 \item Scalability -- database should be able to handle many years' worth of information
 \end{itemize}
-
 
 \subsection{Use Cases}
 %This subsection is arguably part of how you define your project scope (why it is in the Scope section...).  In a traditional Waterfall approach, as part of your requirements gathering phase (what does the product actually \emph{need} to do?), you will typically sit down with a user to develop use cases.
@@ -116,11 +108,9 @@ Users can keep the database stored locally so their own form(s) of security will
 \hline
 Use Case ID & Use Case Name & Primary Actor & Complexity & Priority \\
 \hline \hline
-1 & Search date & User & Med & 1\\
+1 & Date range & User & Med & 1\\
 \hline
-2 & Add budget category & User & Med & 1\\
-\hline
-3 & Sign-in & User & Med & 1\\
+2 & Add entry & User & High & 2\\
 \hline
 
 \end{tabular}
@@ -167,7 +157,6 @@ Alternative: Input is null
 \item Entry will be stored in the database
 \item[Termination Outcome:] The database will now contain another entry made by the user. (NOTE: does not dynamically update Financials table if entry is in range)
 \end{enumerate}
-%fix use cases
 
 %\begin{figure}[ht!]
 %\includegraphics[height=250px, width=350px]{cat1.jpg}
@@ -180,11 +169,27 @@ Three objects that allow the user to input, DecimalUpDown (restricts to numerica
  "Add" Button allows user to add this in one click.
 Date range selection utilizes two DatePickers for easy selection.
 "Display" Button allows user to update Financials table in one click.
-%needs pictures
+
+\begin{figure}[ht!]
+\includegraphics[scale=1]{AddEntry.png}
+\caption{By filling out the form and clicking "Add," the user can add an entry to the database.}
+\label{AddEntry}
+\end{figure}
+
+\begin{figure}[ht!]
+\includegraphics[scale=1]{DateRange.png}
+\caption{By selecting a Start and End Date, the user can click "Display" to display the information in \ref{FinancialsTable}.}
+\label{DateRange}
+\end{figure}
+
+\begin{figure}[ht!]
+\includegraphics[scale=1]{FinancialsTable.png}
+\caption{Display information from \ref{DateRange} will appear here.}
+\label{FinancialsTable}
+\end{figure}
 
 \section{Project Timeline}
-Timeline vaguely looks like... See Figure \ref{Timeline}.
-%explain
+Timeline vaguely looks like... See Figure \ref{Timeline}. Majority of the project's lifetime was spent doing prep work through UMLs and filling out documentation. Majority of the actual programming took place towards the end.
 
 \begin{figure}[ht!]
 \includegraphics[height=350px, width=500px]{Timeline.png}
@@ -194,7 +199,6 @@ Timeline vaguely looks like... See Figure \ref{Timeline}.
 
 \section{Project Structure}
 MainWindow utilizes DisplayDataRange and AddEntry to provide easy-to-use interfaces for the user.
-%needs updating
 
 \subsection{UML Outline}
 UML vaguely looks like... See Figure \ref{UML}. MainWindow utilizes two main functions: DisplayDataRange and AddEntry. DisplayDataRange takes the StartDatePicker's and EndDatePicker's entered dates to determine what should be displayed in the table. AddEntry takes the Amount, Date, and Description entered into the form to create a new entry in the database that can be loaded up later.
